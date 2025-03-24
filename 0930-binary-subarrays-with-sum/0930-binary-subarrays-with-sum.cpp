@@ -1,23 +1,26 @@
 class Solution {
 public:
-    int numSubarraysWithSum(vector<int>& nums, int goal) {
+    int numSubarraysWithSum(vector<int>& arr, int k) {
       
-        int n = nums.size();
-        int count = 0;
+       int n = arr.size(); // size of the given array.
+    map<int,int>mpp;
+    int preSum = 0, cnt = 0;
 
-        // Iterate over all possible starting points
-        for (int i = 0; i < n; i++) {
-            int sum = 0; // Reset sum for each new subarray
+    mpp[0] = 1; // Setting 0 in the map.
+    for (int i = 0; i < n; i++) {
+        // add current element to prefix Sum:
+        preSum += arr[i];
 
-            // Iterate over all possible ending points
-            for (int j = i; j < n; j++) {
-                sum += nums[j]; // Add current element to sum
-                
-                if (sum == goal) {
-                    count++; // Increment count if sum equals goal
-                }
-            }
-        }
-        return count;
+        // Calculate x-k:
+        int remove = preSum - k;
+
+        // Add the number of subarrays to be removed:
+        cnt += mpp[remove];
+
+        // Update the count of prefix sum
+        // in the map.
+        mpp[preSum] += 1;
+    }
+    return cnt;
     }
 };
