@@ -6,7 +6,7 @@ vector<int> prevs(vector<int>&nums){
         stack<int> st;
 
         for (int i = 0; i < n; i++) {
-            while (!st.empty() && nums[st.top()] >= nums[i]) st.pop();
+            while (!st.empty() && nums[st.top()] > nums[i]) st.pop();
             pse[i] = st.empty() ? -1 : st.top();  // Store index, not value
             st.push(i);
         }
@@ -19,7 +19,7 @@ vector<int> prevs(vector<int>&nums){
         stack<int> st;
 
         for (int i = n - 1; i >= 0; i--) {
-            while (!st.empty() && nums[st.top()] > nums[i]) st.pop();
+            while (!st.empty() && nums[st.top()] >= nums[i]) st.pop();
             nse[i] = st.empty() ? n : st.top();  // Store index, not value
             st.push(i);
         }
