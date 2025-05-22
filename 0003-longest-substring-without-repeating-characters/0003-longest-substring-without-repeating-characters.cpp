@@ -10,7 +10,7 @@ public:
   {
     if (set.find(str[r]) != set.end()) //if duplicate element is found
     {
-      while (l < r && set.find(str[r]) != set.end()) {
+      while (l < r&&set.find(str[r]) != set.end()) {
         set.erase(str[l]);
         l++;
       }
