@@ -11,16 +11,22 @@
  */
 class Solution {
 public:
-    void kth(TreeNode*root , vector<int>&arr, int k){
-         if(!root)return ;
-        kth(root->left,arr, k);
-        arr.push_back(root->val);
-        kth(root->right,arr, k);
+    int count = 0;
+    int result = -1;
+
+    void inorder(TreeNode* root, int k) {
+        if (!root || result != -1) return;
+        inorder(root->left, k);
+        count++;
+        if (count == k) {
+            result = root->val;
+            return;
+        }
+        inorder(root->right, k);
     }
+
     int kthSmallest(TreeNode* root, int k) {
-        vector<int>arr;
-        kth(root,arr,k);
-        // sort(arr.begin(), arr.end()); no need due to inorder
-        return arr[k-1];
+        inorder(root, k);
+        return result;
     }
 };
