@@ -8,12 +8,12 @@ public:
         int n = intervals.size();
         sort(intervals.begin(), intervals.end(), cmp);
 
-        int prev = 0;
+        int curre = intervals[0][1];
         int count = 1;
 
         for(int i = 1; i < n; i++){
-            if(intervals[i][0] >= intervals[prev][1]){
-                prev = i;
+            if(intervals[i][0] >= curre){
+                curre=intervals[i][1];
                 count++;
             }
         }
