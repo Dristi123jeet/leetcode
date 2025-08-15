@@ -1,17 +1,17 @@
 class Solution {
-    private:
-    int helper(int i, vector<int>nums, vector<int>dp){
-        if(i==0)return nums[0];
-        if(i<1)return 0;
-        if(dp[i]!=-1)return dp[i];
-        int p= nums[i]+ helper(i-2, nums, dp);
-        int np= 0+ helper(i-1, nums, dp);
-        return dp[i]= max(p,np);
-    }
+   
 public:
     int rob(vector<int>& nums) {
         int n= nums.size();
         vector<int>dp(n,-1);
-         return helper(n-1, nums, dp);
+        dp[0]=nums[0];
+        int neg=0;
+        for(int i=1; i<n ;i++){
+            int p= nums[i];
+            if(i>1)p+=dp[i-2];
+            int np= 0+ dp[i-1];
+            dp[i]= max(p,np);
+        }
+        return dp[n-1];
     }
 };
